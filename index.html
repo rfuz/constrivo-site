@@ -3,25 +3,276 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Constrivo — Legal</title>
+<title>Constrivo — AI Renovation Planner</title>
+<meta name="description" content="Plan any renovation with AI. Take photos, describe your vision, get a complete project plan with tasks, materials, and costs in minutes.">
+<meta property="og:title" content="Constrivo — AI Renovation Planner">
+<meta property="og:description" content="Plan any renovation with AI. Photo → complete project plan in minutes.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://constrivo.app">
+<link rel="canonical" href="https://constrivo.app">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F5F0EB; color: #1A1A1A; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-.card { background: #fff; border-radius: 16px; padding: 40px 32px; box-shadow: 0 2px 12px rgba(30,20,10,0.08); text-align: center; max-width: 400px; }
-h1 { font-size: 28px; font-weight: 600; color: #C4652E; margin-bottom: 8px; }
-p { font-size: 15px; color: #6B6560; margin-bottom: 24px; }
-a { display: block; padding: 14px 24px; margin-bottom: 10px; background: #C4652E; color: white; text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 15px; transition: background 0.2s; }
-a:hover { background: #9A4A1E; }
-a.secondary { background: #EDE7E0; color: #1A1A1A; }
-a.secondary:hover { background: #DDD5CC; }
+:root{
+--bg:#F5F0EB;--card:#FFFFFF;--surface:#EDE7E0;
+--primary:#C4652E;--primary-dark:#9A4A1E;--primary-light:#E8956A;
+--accent:#2D6A4F;--text:#1A1A1A;--text-secondary:#6B6560;--text-muted:#9C958E;
+--border:#DDD5CC;--blue:#2980B9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:background .3s,box-shadow .3s}
+.nav.scrolled{background:rgba(245,240,235,0.95);backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(30,20,10,0.08)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo{width:36px;height:36px;border-radius:10px}
+.nav-name{font-family:'Fraunces',serif;font-size:20px;font-weight:500;color:var(--text)}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text-secondary);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--primary)}
+.nav-cta{padding:10px 20px;background:var(--primary);color:white;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s}
+.nav-cta:hover{background:var(--primary-dark);transform:translateY(-1px)}
+
+/* Hero */
+.hero{max-width:1100px;margin:0 auto;padding:140px 24px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--surface);border-radius:20px;font-size:13px;font-weight:500;color:var(--accent);margin-bottom:20px}
+.hero-badge span{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-family:'Fraunces',serif;font-size:52px;font-weight:500;line-height:1.15;margin-bottom:20px;color:var(--text)}
+.hero h1 em{font-style:normal;color:var(--primary)}
+.hero p{font-size:18px;line-height:1.7;color:var(--text-secondary);margin-bottom:32px;max-width:480px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:16px 28px;background:var(--primary);color:white;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;transition:all .25s;box-shadow:0 4px 16px rgba(196,101,46,0.3)}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 6px 24px rgba(196,101,46,0.4)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:16px 28px;background:var(--card);color:var(--text);border:1.5px solid var(--border);border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;transition:all .2s}
+.btn-secondary:hover{background:var(--surface);transform:translateY(-1px)}
+
+.hero-visual{position:relative;display:flex;justify-content:center}
+.phone-mockup{width:280px;height:560px;background:var(--card);border-radius:36px;box-shadow:0 24px 64px rgba(30,20,10,0.15);border:8px solid #1A1612;overflow:hidden;position:relative}
+.phone-screen{width:100%;height:100%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text-muted)}
+.phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#1A1612;border-radius:0 0 16px 16px;z-index:2}
+.floating-card{position:absolute;background:var(--card);border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(30,20,10,0.12);animation:float 3s ease-in-out infinite}
+.floating-card.fc1{top:60px;right:-30px;animation-delay:0s}
+.floating-card.fc2{bottom:100px;left:-40px;animation-delay:1.5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.fc-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px}
+.fc-value{font-size:18px;font-weight:700;color:var(--primary);margin-top:2px}
+.fc-row{display:flex;align-items:center;gap:8px;margin-top:2px}
+.fc-bar{width:80px;height:6px;background:var(--surface);border-radius:3px;overflow:hidden}
+.fc-fill{height:100%;background:var(--accent);border-radius:3px}
+
+/* How it works */
+.how{max-width:1100px;margin:0 auto;padding:80px 24px}
+.section-label{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--primary);margin-bottom:12px}
+.section-title{font-family:'Fraunces',serif;font-size:36px;font-weight:500;margin-bottom:48px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.step{background:var(--card);border-radius:16px;padding:32px 28px;box-shadow:0 2px 12px rgba(30,20,10,0.06);transition:all .25s;border:1px solid transparent}
+.step:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(30,20,10,0.1);border-color:var(--border)}
+.step-num{width:40px;height:40px;border-radius:12px;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;margin-bottom:20px}
+.step h3{font-size:18px;font-weight:600;margin-bottom:8px}
+.step p{font-size:14px;line-height:1.7;color:var(--text-secondary)}
+
+/* Features */
+.features{max-width:1100px;margin:0 auto;padding:80px 24px}
+.features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.feature{background:var(--card);border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(30,20,10,0.06);transition:all .2s}
+.feature:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,20,10,0.1)}
+.feature-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:22px}
+.feature h3{font-size:16px;font-weight:600;margin-bottom:6px}
+.feature p{font-size:14px;line-height:1.6;color:var(--text-secondary)}
+
+/* CTA */
+.cta{max-width:1100px;margin:0 auto;padding:80px 24px}
+.cta-card{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:24px;padding:60px 48px;text-align:center;color:white;position:relative;overflow:hidden}
+.cta-card::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,0.05)}
+.cta-card h2{font-family:'Fraunces',serif;font-size:36px;font-weight:500;margin-bottom:12px;position:relative}
+.cta-card p{font-size:18px;opacity:.9;margin-bottom:32px;position:relative}
+.btn-white{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;background:white;color:var(--primary);border-radius:12px;font-size:16px;font-weight:700;text-decoration:none;transition:all .25s;position:relative}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
+
+/* Footer */
+.footer{max-width:1100px;margin:0 auto;padding:40px 24px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border)}
+.footer-brand{display:flex;align-items:center;gap:8px}
+.footer-brand img{width:24px;height:24px;border-radius:6px}
+.footer-brand span{font-family:'Fraunces',serif;font-size:16px;font-weight:500;color:var(--text-secondary)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:13px;color:var(--text-muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--primary)}
+.footer-copy{font-size:12px;color:var(--text-muted)}
+
+/* Responsive */
+@media(max-width:768px){
+.hero{grid-template-columns:1fr;padding:120px 24px 60px;gap:40px;text-align:center}
+.hero h1{font-size:36px}
+.hero p{margin-left:auto;margin-right:auto}
+.hero-buttons{justify-content:center}
+.hero-visual{order:-1}
+.phone-mockup{width:220px;height:440px}
+.floating-card.fc1{right:0}
+.floating-card.fc2{left:0}
+.steps{grid-template-columns:1fr}
+.features-grid{grid-template-columns:1fr}
+.nav-links{display:none}
+.cta-card{padding:40px 24px}
+.cta-card h2{font-size:28px}
+.footer{flex-direction:column;gap:16px;text-align:center}
+}
 </style>
 </head>
 <body>
-<div class="card">
-<h1>Constrivo</h1>
-<p>AI-powered renovation planner</p>
-<a href="privacy.html">Privacy Policy</a>
-<a href="terms.html" class="secondary">Terms of Service</a>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+<div class="nav-inner">
+<a href="/" class="nav-brand">
+<img src="icon.png" alt="Constrivo" class="nav-logo">
+<span class="nav-name">Constrivo</span>
+</a>
+<div class="nav-links">
+<a href="#how">How it works</a>
+<a href="#features">Features</a>
+<a href="mailto:hello@constrivo.app">Contact</a>
 </div>
+<a href="#download" class="nav-cta">Get the App</a>
+</div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+<div>
+<div class="hero-badge"><span></span> AI-Powered Planning</div>
+<h1>Plan any <em>renovation</em> with AI</h1>
+<p>Take photos of your space, describe your vision, and Constrivo generates a complete project plan with tasks, materials, costs, and timeline — in minutes.</p>
+<div class="hero-buttons">
+<a href="#download" class="btn-primary">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+Get on Google Play
+</a>
+<a href="#how" class="btn-secondary">See how it works</a>
+</div>
+</div>
+<div class="hero-visual">
+<div class="phone-mockup">
+<div class="phone-notch"></div>
+<div class="phone-screen">App Screenshot</div>
+</div>
+<div class="floating-card fc1">
+<div class="fc-label">AI Generated</div>
+<div class="fc-value">24 tasks</div>
+</div>
+<div class="floating-card fc2">
+<div class="fc-label">Budget</div>
+<div class="fc-row">
+<div class="fc-bar"><div class="fc-fill" style="width:62%"></div></div>
+<span style="font-size:12px;font-weight:600;color:var(--accent)">62%</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- How it Works -->
+<section class="how" id="how">
+<div class="section-label">How it works</div>
+<h2 class="section-title">From photo to plan in 3 steps</h2>
+<div class="steps">
+<div class="step">
+<div class="step-num">1</div>
+<h3>Snap & Describe</h3>
+<p>Take photos of your space and describe what you want to achieve. Kitchen renovation? Bathroom remodel? Full house flip? Constrivo handles it all.</p>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<h3>AI Generates Your Plan</h3>
+<p>Our AI analyses your photos and description, then generates a complete project plan with phases, tasks, materials list, cost estimates, and realistic timeline.</p>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<h3>Track & Execute</h3>
+<p>Manage tasks, log daily progress, track costs against budget, and document everything with photos. Your entire renovation in one place.</p>
+</div>
+</div>
+</section>
+
+<!-- Features -->
+<section class="features" id="features">
+<div class="section-label">Features</div>
+<h2 class="section-title">Everything you need to manage your renovation</h2>
+<div class="features-grid">
+<div class="feature">
+<div class="feature-icon" style="background:#FEF3E2">🤖</div>
+<h3>AI Project Planning</h3>
+<p>Generate complete renovation plans from photos and descriptions. Tasks, materials, costs, and timeline — all estimated by AI based on your location and skill level.</p>
+</div>
+<div class="feature">
+<div class="feature-icon" style="background:#E8F5E9">📋</div>
+<h3>Task Management</h3>
+<p>Track tasks across phases with status, dependencies, and skill level indicators. Know what's done, what's in progress, and what's blocked at a glance.</p>
+</div>
+<div class="feature">
+<div class="feature-icon" style="background:#EBF5FB">💰</div>
+<h3>Cost Control</h3>
+<p>Monitor estimated vs actual costs in real-time. Log expenses with receipt photos. Get alerts when approaching or exceeding your budget.</p>
+</div>
+<div class="feature">
+<div class="feature-icon" style="background:#F3E5F5">📅</div>
+<h3>Visual Timeline</h3>
+<p>See your entire project on a Gantt chart or daily task list. Identify critical paths, blocked tasks, and overdue items with color-coded indicators.</p>
+</div>
+<div class="feature">
+<div class="feature-icon" style="background:#FDEDEC">📸</div>
+<h3>Photo Documentation</h3>
+<p>Capture before, during, and after photos for every task. Build a visual record of your entire renovation journey.</p>
+</div>
+<div class="feature">
+<div class="feature-icon" style="background:#E8F5E9">🌍</div>
+<h3>10 Languages</h3>
+<p>Available in English, Portuguese, Spanish, French, German, Italian, Dutch, Polish, Romanian, and Brazilian Portuguese. AI generates plans in your language.</p>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="download">
+<div class="cta-card">
+<h2>Ready to plan your renovation?</h2>
+<p>Download Constrivo and get your AI-generated project plan in minutes.</p>
+<a href="#" class="btn-white">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+Download on Google Play
+</a>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+<div class="footer-brand">
+<img src="icon.png" alt="Constrivo">
+<span>Constrivo</span>
+</div>
+<div class="footer-links">
+<a href="privacy.html">Privacy Policy</a>
+<a href="terms.html">Terms of Service</a>
+<a href="mailto:hello@constrivo.app">Contact</a>
+</div>
+<div class="footer-copy">© 2026 Constrivo. Developed by rfuz labs.</div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+nav.classList.toggle('scrolled',window.scrollY>20);
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+a.addEventListener('click',e=>{
+e.preventDefault();
+const t=document.querySelector(a.getAttribute('href'));
+if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+});
+});
+</script>
 </body>
 </html>
