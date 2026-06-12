@@ -42,16 +42,53 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);ove
 .hero h1{font-family:'Fraunces',serif;font-size:52px;font-weight:500;line-height:1.15;margin-bottom:20px;color:var(--text)}
 .hero h1 em{font-style:normal;color:var(--primary)}
 .hero p{font-size:18px;line-height:1.7;color:var(--text-secondary);margin-bottom:32px;max-width:480px}
-.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:16px 28px;background:var(--primary);color:white;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;transition:all .25s;box-shadow:0 4px 16px rgba(196,101,46,0.3)}
 .btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 6px 24px rgba(196,101,46,0.4)}
 .btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:16px 28px;background:var(--card);color:var(--text);border:1.5px solid var(--border);border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;transition:all .2s}
 .btn-secondary:hover{background:var(--surface);transform:translateY(-1px)}
 
+/* Google Play Badge */
+.play-badge{display:inline-block;transition:transform .2s}
+.play-badge:hover{transform:translateY(-2px)}
+.play-badge img{height:56px;border-radius:8px}
+
 .hero-visual{position:relative;display:flex;justify-content:center}
 .phone-mockup{width:280px;height:560px;background:var(--card);border-radius:36px;box-shadow:0 24px 64px rgba(30,20,10,0.15);border:8px solid #1A1612;overflow:hidden;position:relative}
-.phone-screen{width:100%;height:100%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text-muted)}
 .phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:28px;background:#1A1612;border-radius:0 0 16px 16px;z-index:2}
+
+/* App UI Mockup inside phone */
+.phone-screen{width:100%;height:100%;background:var(--bg);overflow:hidden;font-size:11px}
+.app-status{height:24px;background:var(--bg);display:flex;align-items:flex-end;justify-content:space-between;padding:0 12px 4px;font-size:10px;font-weight:600}
+.app-header{padding:8px 12px 6px;background:var(--bg)}
+.app-header-title{font-family:'Fraunces',serif;font-size:16px;font-weight:500}
+.app-header-sub{font-size:9px;color:var(--text-muted)}
+.app-new-btn{margin:4px 12px 8px;background:var(--primary);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:8px;color:white}
+.app-new-btn-icon{width:28px;height:28px;background:rgba(255,255,255,0.2);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.app-new-btn-text{font-size:11px;font-weight:600}
+.app-new-btn-sub{font-size:9px;opacity:.85}
+.app-section{padding:4px 12px 4px;font-size:9px;font-weight:700;letter-spacing:.8px;color:var(--text-muted);text-transform:uppercase}
+.app-card{margin:4px 12px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+.app-card-img{height:70px;background:linear-gradient(135deg,#8B7355,#C4A882);display:flex;align-items:flex-end;padding:6px 8px}
+.app-card-img-badge{background:rgba(255,255,255,0.92);border-radius:10px;padding:2px 7px;font-size:8px;font-weight:600;color:var(--primary)}
+.app-card-body{padding:8px 10px}
+.app-card-title{font-size:11px;font-weight:600;margin-bottom:2px}
+.app-card-meta{font-size:9px;color:var(--text-muted);margin-bottom:6px}
+.app-progress{height:4px;background:var(--surface);border-radius:2px;overflow:hidden;margin-bottom:4px}
+.app-progress-fill{height:100%;background:var(--primary);border-radius:2px;width:35%}
+.app-card-stats{display:flex;justify-content:space-between;font-size:8px;color:var(--text-muted)}
+.app-task{margin:4px 12px;background:var(--card);border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.app-task-dot{width:14px;height:14px;border-radius:4px;background:#FEF3E2;border:1.5px solid var(--primary-light);flex-shrink:0}
+.app-task-dot.done{background:var(--accent);border-color:var(--accent)}
+.app-task-info{flex:1;min-width:0}
+.app-task-title{font-size:10px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app-task-meta{font-size:8px;color:var(--text-muted)}
+.app-nav{position:absolute;bottom:0;left:0;right:0;height:44px;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:center;padding-bottom:2px}
+.app-nav-item{display:flex;flex-direction:column;align-items:center;gap:1px;font-size:7px;color:var(--text-muted);font-weight:500}
+.app-nav-item.active{color:var(--primary)}
+.app-nav-dot{width:16px;height:3px;border-radius:1.5px;background:var(--primary);margin-bottom:2px;opacity:0}
+.app-nav-item.active .app-nav-dot{opacity:1}
+
 .floating-card{position:absolute;background:var(--card);border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(30,20,10,0.12);animation:float 3s ease-in-out infinite}
 .floating-card.fc1{top:60px;right:-30px;animation-delay:0s}
 .floating-card.fc2{bottom:100px;left:-40px;animation-delay:1.5s}
@@ -88,8 +125,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);ove
 .cta-card::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,0.05)}
 .cta-card h2{font-family:'Fraunces',serif;font-size:36px;font-weight:500;margin-bottom:12px;position:relative}
 .cta-card p{font-size:18px;opacity:.9;margin-bottom:32px;position:relative}
-.btn-white{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;background:white;color:var(--primary);border-radius:12px;font-size:16px;font-weight:700;text-decoration:none;transition:all .25s;position:relative}
+.cta-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;position:relative}
+.btn-white{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;background:white;color:var(--primary);border-radius:12px;font-size:16px;font-weight:700;text-decoration:none;transition:all .25s}
 .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
+.play-badge-white img{height:56px;border-radius:8px;filter:brightness(1.05)}
+.play-badge-white{display:inline-block;transition:transform .2s}
+.play-badge-white:hover{transform:translateY(-2px)}
 
 /* Footer */
 .footer{max-width:1100px;margin:0 auto;padding:40px 24px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border)}
@@ -134,7 +175,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);ove
 <a href="#features">Features</a>
 <a href="mailto:hello@constrivo.app">Contact</a>
 </div>
-<a href="#download" class="nav-cta">Get the App</a>
+<a href="https://play.google.com/store/apps/details?id=app.constrivo.mobile" target="_blank" rel="noopener" class="nav-cta">Get the App</a>
 </div>
 </nav>
 
@@ -145,9 +186,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);ove
 <h1>Plan any <em>renovation</em> with AI</h1>
 <p>Take photos of your space, describe your vision, and Constrivo generates a complete project plan with tasks, materials, costs, and timeline — in minutes.</p>
 <div class="hero-buttons">
-<a href="#download" class="btn-primary">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-Get on Google Play
+<a href="https://play.google.com/store/apps/details?id=app.constrivo.mobile" target="_blank" rel="noopener" class="play-badge">
+<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
 </a>
 <a href="#how" class="btn-secondary">See how it works</a>
 </div>
@@ -155,7 +195,79 @@ Get on Google Play
 <div class="hero-visual">
 <div class="phone-mockup">
 <div class="phone-notch"></div>
-<div class="phone-screen">App Screenshot</div>
+<div class="phone-screen">
+<div class="app-status">
+<span>9:41</span>
+<span>●●●</span>
+</div>
+<div class="app-header">
+<div class="app-header-title">Good morning 🏗️</div>
+<div class="app-header-sub">2 active projects · 4 tasks this week</div>
+</div>
+<div class="app-new-btn">
+<div class="app-new-btn-icon">+</div>
+<div>
+<div class="app-new-btn-text">New Project</div>
+<div class="app-new-btn-sub">Photo + description → AI plan</div>
+</div>
+</div>
+<div class="app-section">Active Projects</div>
+<div class="app-card">
+<div class="app-card-img">
+<span class="app-card-img-badge">Phase 2 · Structure</span>
+</div>
+<div class="app-card-body">
+<div class="app-card-title">Hotel Rural Alentejo</div>
+<div class="app-card-meta">Montemor-o-Novo · Full renovation</div>
+<div class="app-progress"><div class="app-progress-fill"></div></div>
+<div class="app-card-stats"><span>12/34 tasks done</span><span>€47k / €120k</span></div>
+</div>
+</div>
+<div class="app-section" style="margin-top:6px">This Week</div>
+<div class="app-task">
+<div class="app-task-dot done"></div>
+<div class="app-task-info">
+<div class="app-task-title">Foundation reinforcement</div>
+<div class="app-task-meta">Hotel Rural · Done</div>
+</div>
+</div>
+<div class="app-task">
+<div class="app-task-dot"></div>
+<div class="app-task-info">
+<div class="app-task-title">Install roof beams</div>
+<div class="app-task-meta">Hotel Rural · Day 3 of 5</div>
+</div>
+</div>
+<div class="app-task">
+<div class="app-task-dot"></div>
+<div class="app-task-info">
+<div class="app-task-title">Order ceramic tiles</div>
+<div class="app-task-meta">Guest Bathroom · Leroy Merlin</div>
+</div>
+</div>
+<div class="app-nav">
+<div class="app-nav-item active">
+<div class="app-nav-dot"></div>
+<span>Home</span>
+</div>
+<div class="app-nav-item">
+<div class="app-nav-dot"></div>
+<span>Timeline</span>
+</div>
+<div class="app-nav-item">
+<div class="app-nav-dot"></div>
+<span>Log</span>
+</div>
+<div class="app-nav-item">
+<div class="app-nav-dot"></div>
+<span>Costs</span>
+</div>
+<div class="app-nav-item">
+<div class="app-nav-dot"></div>
+<span>Profile</span>
+</div>
+</div>
+</div>
 </div>
 <div class="floating-card fc1">
 <div class="fc-label">AI Generated</div>
@@ -217,7 +329,7 @@ Get on Google Play
 <div class="feature">
 <div class="feature-icon" style="background:#F3E5F5">📅</div>
 <h3>Visual Timeline</h3>
-<p>See your entire project on a Gantt chart or daily task list. Identify critical paths, blocked tasks, and overdue items with color-coded indicators.</p>
+<p>See your entire project on a Gantt chart or daily task list. Identify critical paths, blocked tasks, and overdue items with colour-coded indicators.</p>
 </div>
 <div class="feature">
 <div class="feature-icon" style="background:#FDEDEC">📸</div>
@@ -236,11 +348,12 @@ Get on Google Play
 <section class="cta" id="download">
 <div class="cta-card">
 <h2>Ready to plan your renovation?</h2>
-<p>Download Constrivo and get your AI-generated project plan in minutes.</p>
-<a href="#" class="btn-white">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-Download on Google Play
+<p>Download Constrivo and get your AI-generated project plan in minutes. Free to get started.</p>
+<div class="cta-buttons">
+<a href="https://play.google.com/store/apps/details?id=app.constrivo.mobile" target="_blank" rel="noopener" class="play-badge-white">
+<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
 </a>
+</div>
 </div>
 </section>
 
@@ -259,13 +372,10 @@ Download on Google Play
 </footer>
 
 <script>
-// Nav scroll effect
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{
 nav.classList.toggle('scrolled',window.scrollY>20);
 });
-
-// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
 a.addEventListener('click',e=>{
 e.preventDefault();
